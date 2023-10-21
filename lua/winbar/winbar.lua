@@ -9,6 +9,8 @@ local hl_winbar_file = "WinBarFile"
 local hl_winbar_symbols = "WinBarSymbols"
 local hl_winbar_file_icon = "WinBarFileIcon"
 
+local api = vim.api
+
 local winbar_mode = function()
 	-- if not f.isempty(value) and f.get_buf_option('mod') then
 	--     local mod = '%#LineNr#' .. opts.editor_state .. '%*'
@@ -20,6 +22,24 @@ local winbar_mode = function()
 	-- end
 
 	-- value = value .. '%{%v:lua.winbar_gps()%}'
+end
+
+local function winbar_get_file_path(file_path)
+	local file_path_list = {}
+	local _ = string.gsub(file_path, "[^/]+", function(w)
+		table.insert(file_path_list, w)
+	end)
+
+	local value = ""
+
+	for i = 1, #file_path_list do
+		if opts.folder_icon then
+      value = value .. "%#NvimTreeFolderIcon# %*"
+		end
+		value = value .. "%#" .. hl_winbar_path .. "#" .. file_path_list[i] .. " " .. opts.icons.seperator .. " %*"
+	end
+
+	return value
 end
 
 local winbar_file = function()
@@ -53,21 +73,7 @@ local winbar_file = function()
 
 		value = " "
 		if opts.show_file_path then
-			local file_path_list = {}
-			local _ = string.gsub(file_path, "[^/]+", function(w)
-				table.insert(file_path_list, w)
-			end)
-
-			for i = 1, #file_path_list do
-				value = value
-					.. "%#"
-					.. hl_winbar_path
-					.. "#"
-					.. file_path_list[i]
-					.. " "
-					.. opts.icons.seperator
-					.. " %*"
-			end
+			value = value .. winbar_get_file_path(file_path)
 		end
 		value = value .. file_icon
 		value = value .. "%#" .. hl_winbar_file .. "#" .. filename .. "%*"
