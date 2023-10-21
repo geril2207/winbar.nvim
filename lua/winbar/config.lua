@@ -4,6 +4,7 @@ M.defaults = {
 	enabled = false,
 
 	show_file_path = true,
+	folder_icon = true,
 	show_symbols = true,
 
 	colors = {
