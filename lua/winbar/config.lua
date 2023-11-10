@@ -1,10 +1,13 @@
 local M = {}
 
+---@class WinbarConfig
+---@field left_spacing nil|function|string
 M.defaults = {
 	enabled = false,
 
 	show_file_path = true,
 	folder_icon = true,
+	left_spacing = nil,
 	show_symbols = true,
 
 	colors = {
@@ -37,6 +40,7 @@ M.defaults = {
 	},
 }
 
+---@class WinbarConfig
 M.options = {}
 
 function M.set_options(opts)
