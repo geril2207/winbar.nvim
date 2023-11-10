@@ -4,6 +4,7 @@ local M = {}
 ---@field left_spacing nil|function|string
 M.defaults = {
 	enabled = false,
+	change_events = { "DirChanged", "CursorMoved", "BufWinEnter", "BufFilePost", "InsertEnter", "BufWritePost" },
 
 	show_file_path = true,
 	folder_icon = true,
@@ -41,10 +42,10 @@ M.defaults = {
 }
 
 ---@class WinbarConfig
-M.options = {}
+M.Config = {}
 
-function M.set_options(opts)
-	M.options = vim.tbl_deep_extend("force", {}, M.defaults, opts or {})
+function M.setup(config)
+	M.Config = vim.tbl_deep_extend("force", {}, M.defaults, config or {})
 end
 
 return M

@@ -1,7 +1,7 @@
 local M = {}
 
 local status_web_devicons_ok, web_devicons = pcall(require, "nvim-web-devicons")
-local config = require("winbar.config").options
+local config = require("winbar.config").Config
 local f = require("winbar.utils")
 
 local hl_winbar_path = "WinBarPath"
@@ -136,6 +136,7 @@ M.init = function()
 end
 
 M.show_winbar = function()
+	print("SHOW_WINBAR")
 	if excludes() then
 		return
 	end
