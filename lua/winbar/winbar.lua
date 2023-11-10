@@ -136,7 +136,6 @@ M.init = function()
 end
 
 M.show_winbar = function()
-	print("SHOW_WINBAR")
 	if excludes() then
 		return
 	end
